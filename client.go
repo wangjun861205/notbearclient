@@ -67,8 +67,8 @@ func NewClient(retryTimes, timeout int, ctx context.Context, err chan error) *Cl
 	}
 	proxyURL, _ := url.Parse("http://127.0.0.1:44625")
 	transport := &http.Transport{
-		MaxIdleConns:        10,
-		MaxIdleConnsPerHost: 10,
+		MaxIdleConns:        100,
+		MaxIdleConnsPerHost: 100,
 		Proxy:               http.ProxyURL(proxyURL),
 	}
 	httpClient := &http.Client{
@@ -103,22 +103,39 @@ OUTER:
 		default:
 			resp, err = c.HttpClient.Do(req)
 			if err != nil {
-				if err, ok := err.(net.Error); ok && err.Timeout() {
-					if i < c.RetryTimes-1 {
-						errTimeout := NewErrTimeout(req.URL, i+1, err)
-						c.Error <- errTimeout
-						continue OUTER
-					} else {
-						errFailed := NewErrFailed(req.URL, err)
-						c.Error <- errFailed
-						return nil
-					}
-				} else {
-					c.Error <- err
-					return nil
-				}
+				// if err, ok := err.(net.Error); ok && err.Timeout() {
+				// 	if i < c.RetryTimes-1 {
+				// 		errTimeout := NewErrTimeout(req.URL, i+1, err)
+				// 		c.Error <- errTimeout
+				// 		continue OUTER
+				// 	} else {
+				// 		errFailed := NewErrFailed(req.URL, err)
+				// 		c.Error <- errFailed
+				// 		return nil
+				// 	}
+				// } else {
+				// 	errNetwork := NewErrNetwork(req.URL, err)
+				// 	c.Error <- errNetwork
+				// 	return nil
+				// }
+				continue OUTER
 			}
 			break OUTER
+		}
+	}
+	if err != nil {
+		switch e := err.(type) {
+		case net.Error:
+			if e.Timeout() {
+				errTimeout := NewErrTimeout(req.URL, err)
+				c.Error <- errTimeout
+			} else {
+				errNetwork := NewErrNetwork(req.URL, err)
+				c.Error <- errNetwork
+			}
+		default:
+			errOther := NewErrOther(req.URL, err)
+			c.Error <- errOther
 		}
 	}
 	return resp
@@ -161,11 +178,41 @@ func (c *Client) ReadResponse(resp *http.Response) string {
 		}
 		reader = iconv.NewReader(c, reader, 0)
 	}
-	byteContent, err := ioutil.ReadAll(reader)
-	if err != nil {
-		c.Error <- err
-		return ""
+	var byteContent []byte
+	var err error
+OUTER:
+	for i := 0; i < c.RetryTimes; i++ {
+		select {
+		case <-c.Context.Done():
+			return ""
+		default:
+			byteContent, err = ioutil.ReadAll(reader)
+			if err != nil {
+				continue OUTER
+			}
+			break OUTER
+		}
 	}
+	if err != nil {
+		switch e := err.(type) {
+		case net.Error:
+			if e.Timeout() {
+				errTimeout := NewErrTimeout(resp.Request.URL, err)
+				c.Error <- errTimeout
+			} else {
+				errNetwork := NewErrNetwork(resp.Request.URL, err)
+				c.Error <- errNetwork
+			}
+		default:
+			errOther := NewErrOther(resp.Request.URL, err)
+			c.Error <- errOther
+		}
+	}
+	// byteContent, err := ioutil.ReadAll(reader)
+	// if err != nil {
+	// 	c.Error <- err
+	// 	return ""
+	// }
 	content := string(byteContent[:])
 	return content
 }
