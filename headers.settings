@@ -1,0 +1,43 @@
+defaultHeader = {
+Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding:gzip, deflate
+Accept-Language:zh-CN,zh;q=0.9,en;q=0.8
+Cache-Control:max-age=0
+Host:www.motorcyclespecs.co.za
+If-Modified-Since:Thu, 16 Nov 2017 05:33:14 GMT
+Proxy-Connection:keep-alive
+Referer:https://www.google.co.jp/
+Upgrade-Insecure-Requests:1
+User-Agent:Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36
+}
+autohomeHeader = {
+Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding:gzip, deflate, br
+Accept-Language:zh-CN,zh;q=0.9,en;q=0.8
+Cache-Control:max-age=0
+Connection:keep-alive
+Host:club.autohome.com.cn
+Upgrade-Insecure-Requests:1
+User-Agent:Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36
+}
+xitekHeader = {
+Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding:gzip, deflate
+Accept-Language:zh-CN,zh;q=0.9,en;q=0.8
+Cache-Control:max-age=0
+Cookie:gr_user_id=de38af30-e43e-4f17-817e-b2ff7f40d5af; rb6q_2ce7_auth=52f9K%2BnTNvfrAE4khZwRxeyL3T44vDtpCzNUlgXuYzThfHNz04OEh4z7yjmioSm%2FEQ%2Fxib1OKNbnEqF2fiJSXsaX9xloaynFGgj2no%2BYhXyzl3E5vcoz8Fby38W8ifHQ3oHr5mLX0qymn3deKhvTEFzaicGjuQ; bbuserid=289481; bbuserid2=289481; votename=wangjun861205; bbpassword=61048A8LY7P1yGg0%2BCp%2Fb99IDoVY%2Bv3U8NBJW4RJyjwIxZoPAKMurQoiWdsdoq8oRWHtImAq6JYyYWCvjw; unipass=c763TuF0YaBzNwPzElV4FvkDnofhmmIIt%2FhdQUwCJ23bh6Vr%2FndLxxmCuLnjIegZOgNB%2FhygYb8QF8pHtQ; photobook=nDjm693z0g0Gwy%2BhfWyCKwDLAiQZKjk6; uniauth=Uw8RQLc9uZ3dCiVmjjhhlfMjw1MGeXd%2Fv2Syd9eE98E%3D; rb6q_2ce7_lastvisit=1511223607; rb6q_2ce7_alertinfo=1; rb6q_2ce7_visitedfid=50; rb6q_2ce7_oldtopics=D1723717D1723751D; rb6q_2ce7_fid50=1511227264; rb6q_2ce7_sid=376Rut; rb6q_2ce7_lastact=1511227323%09home.php%09spacecp; __utmt=1; __utmt_~1=1; __utma=173087013.1531987671.1502252693.1510978079.1511227199.78; __utmb=173087013.8.10.1511227199; __utmc=173087013; __utmz=173087013.1505277505.21.2.utmcsr=baidu|utmccn=(organic)|utmcmd=organic; Hm_lvt_4cccbdc1d48adf6a60667120620613e7=1510806109,1510892998,1510973350,1511227199; Hm_lpvt_4cccbdc1d48adf6a60667120620613e7=1511228147; gr_session_id_a9f5756bb1107fb5=769d015f-dd3e-4fa5-93ef-0f07a2423950
+Host:ww.xitek.com
+Proxy-Connection:keep-alive
+Upgrade-Insecure-Requests:1
+User-Agent:Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36
+}
+motoSpecHeader = {
+Accept:text/html,application/xhtml+xm…plication/xml;q=0.9,*/*;q=0.8
+Accept-Encoding:gzip, deflate
+Accept-Language:zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+Connection:keep-alive
+Host:www.motorcycle.com
+Referer:http://www.motorcycle.com/specs/
+Upgrade-Insecure-Requests:1
+User-Agent:Mozilla/5.0 (X11; Linux x86_64…) Gecko/20100101 Firefox/57.0
+}
